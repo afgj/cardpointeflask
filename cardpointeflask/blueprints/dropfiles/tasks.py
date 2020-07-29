@@ -81,11 +81,12 @@ def process_files(self, fileList):
     self.update_state(state=states.FAILURE)
     raise Ignore()
 
+
 def files_are_valid(fileList):
     """ Make sure files are valid to be processed """
-    if len(fileList) is not 2:
+    if len(fileList) != 2:
         return False
-    valid_keys = CARDPOINTE_KEYS|SALSA_KEYS
+    valid_keys = CARDPOINTE_KEYS | SALSA_KEYS
     for f in fileList:
         file_d = pyexcel.get_dict(file_name=os.path.join(current_app.config['UPLOAD_FOLDER'], f),\
             name_columns_by_row=0)
