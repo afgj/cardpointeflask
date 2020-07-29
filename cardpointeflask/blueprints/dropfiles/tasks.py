@@ -88,7 +88,8 @@ def files_are_valid(fileList):
         return False
     valid_keys = CARDPOINTE_KEYS | SALSA_KEYS
     for f in fileList:
-        file_d = pyexcel.get_dict(file_name=os.path.join(current_app.config['UPLOAD_FOLDER'], f),\
+        file_d = pyexcel.get_dict(
+            file_name=os.path.join(current_app.config['UPLOAD_FOLDER'], f),
             name_columns_by_row=0)
         for key in file_d.keys():
             if key not in valid_keys:
