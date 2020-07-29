@@ -124,6 +124,7 @@ def authentication(app, user_model):
             return user_model.query.get(user_uid)
         return None
 
+
 def configure_logging():
     # register root logging
     logging.basicConfig(level=logging.DEBUG)

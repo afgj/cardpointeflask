@@ -9,7 +9,6 @@ from celery.exceptions import Ignore
 from celery.utils.log import get_task_logger
 
 from cardpointeflask.app import create_celery_app
-from cardpointeflask.extensions import excel as p
 
 import pyexcel
 
@@ -18,6 +17,7 @@ from lib.util_dropfiles import CARDPOINTE_KEYS, SALSA_KEYS
 LOG = get_task_logger(__name__)
 
 celery = create_celery_app()
+
 
 @celery.task(bind=True)
 def process_files(self, fileList):
