@@ -24,24 +24,26 @@ def process_files(self, fileList):
     """
     Match cardpointe transactions with salsa forms.
 
-    For now we will simply manipulate csv,xls files but eventually we will load data from the database.
+    For now we will simply manipulate csv,xls files but
+    eventually we will load data from the database.
     TODO:
       - Write tests
       - Write transactions to database
       - Validate file(s) afterwards
     """
     if fileList and files_are_valid(fileList):
-        ### Identify cardpointe file and salsa file
-        ### Get all records from both
-        ### Set salsa file to be indexed by transaction id
-        ### Correct form name in cardpointe file
-        ### Return write final_file to disk
+        # Identify cardpointe file and salsa file
+        # Get all records from both
+        # Set salsa file to be indexed by transaction id
+        # Correct form name in cardpointe file
+        # Return write final_file to disk
 
         salsa = {}
         cpointe = []
         for filename in fileList:
             shortname = secure_filename(filename)
-            pathname = os.path.join(current_app.config['UPLOAD_FOLDER'], shortname)
+            pathname = os.path.join(current_app.config['UPLOAD_FOLDER'],
+                                    shortname)
             records = pyexcel.get_records(file_name=pathname)
             keys = records[1].keys()
 
@@ -60,13 +62,22 @@ def process_files(self, fileList):
                 cpointe[index]['FORM_NAME (Custom Field #0)'] = form_name
                 self.update_state(
                     state='PROGRESS',
-                    meta={'current': format(index/len(cpointe), '.2f'), 'total': 100, 'status': 'PROCESSING'})
+                    meta={
+                        'current': format(index/len(cpointe), '.2f'),
+                        'total': 100, 'status': 'PROCESSING'})
 
             f = 'cardpointe' + time.strftime("%Y%m%d-%H%M%S") + '.csv'
             p = os.path.join(current_app.config['UPLOAD_FOLDER'], f)
 
-            pyexcel.save_as(records=cpointe, dest_file_name=p, dest_delimiter=',')
-            return {'current': 100, 'total': 100, 'status': 'Task completed!', 'result': f}
+            pyexcel.save_as(
+                records=cpointe,
+                dest_file_name=p,
+                dest_delimiter=',')
+            return {
+                'current': 100,
+                'total': 100,
+                'status': 'Task completed!',
+                'result': f}
     self.update_state(state=states.FAILURE)
     raise Ignore()
 
