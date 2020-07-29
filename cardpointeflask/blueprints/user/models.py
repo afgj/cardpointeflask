@@ -26,12 +26,12 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types', native_enum=False),
-                        index=True, nullable=False, server_default='member')
+                     index=True, nullable=False, server_default='member')
     active = db.Column('is_active', db.Boolean(), nullable=False,
-                        server_default='1')
+                       server_default='1')
     username = db.Column(db.String(24), unique=True, index=True)
     email = db.Column(db.String(255), unique=True, index=True, nullable=False,
-                        server_default='')
+                      server_default='')
     password = db.Column(db.String(128), nullable=False, server_default='')
 
     # Activity tracking.
@@ -46,7 +46,7 @@ class User(UserMixin, ResourceMixin, db.Model):
         super(User, self).__init__(**kwargs)
 
         self.password = User.encrypt_password(kwargs.get('password', ''))
-    
+
     @classmethod
     def find_by_identity(cls, identity):
         """

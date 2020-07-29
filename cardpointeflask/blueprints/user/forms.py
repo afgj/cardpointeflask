@@ -6,8 +6,9 @@ from wtforms_alchemy import Unique
 
 from lib.util_wtforms import ModelForm
 from cardpointeflask.blueprints.user.models import User, db
-from cardpointeflask.blueprints.user.validations import ensure_identity_exists, \
-    ensure_existing_password_matches
+from cardpointeflask.blueprints.user.validations import (
+    ensure_identity_exists,
+    ensure_existing_password_matches)
 
 
 class LoginForm(FlaskForm):
