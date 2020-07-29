@@ -1,0 +1,1 @@
+from cardpointeflask.blueprints.dropfiles.views import dropfiles

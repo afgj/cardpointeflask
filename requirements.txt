@@ -1,0 +1,34 @@
+Flask==1.1.2
+werkzeug==0.16.1
+
+# Application server for both development and production.
+gunicorn==19.4.5
+
+# Testing and static analysis.
+pytest==5.1.0
+pytest-cov==2.7.1
+flake8==3.7.8
+
+# CLI.
+Click==6.4
+
+# Data and workers.
+redis==3.5.3
+celery==4.4.6
+psycopg2
+Flask-SQLAlchemy
+SQLAlchemy
+WTForms-Alchemy==0.17.0
+
+# Forms.
+Flask-WTF==0.14
+WTForms-Components
+
+# Extensions.
+flask-debugtoolbar==0.10.0
+Flask-Mail==0.9.1
+Flask-Excel
+Flask-Login
+
+# Misc.
+pyexcel-xls

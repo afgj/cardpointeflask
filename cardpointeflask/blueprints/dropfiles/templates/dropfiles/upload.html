@@ -1,0 +1,36 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}DropFilezz{% endblock %}
+{% block meta_description %}dropfile{% endblock %}
+
+{% block body %}
+  <div id="buffer"></div>
+  <form
+    id="mydropzone",
+    action="{{ url_for('dropfiles.upload_file') }}"
+    class="dropzone" 
+    method="POST" 
+    enctype="multipart/form-data">
+    {% if form %}
+      <div class="fallback">
+          {{ form.hidden_tag() }}
+          {{ form.file }}
+      </div>
+    {% endif %}
+  </form>
+  <div id="button-holder" class="row marketing md-margin-top">
+    <div class="col-md-8">
+      <p>Upload 2 files: One from CardPointe and the other from Salsa. Click the Process Files button to upload.</p>
+      <p>If the processing is a success you will be able to download the correctly formatted file.</p>
+    </div>
+    <div class="col-md-4">
+      <input id="processButton" class="btn btn-primary" value="Process Files">
+      <input id="downloadFile" class="btn btn-success" value="Download Correct File" disabled>
+    </div>
+  </div>
+  <div class="row md-margin-top">
+    <div class="col-md-12">
+      <div id="progress" class=""></div>
+    </div>
+  </div>
+{% endblock %}
