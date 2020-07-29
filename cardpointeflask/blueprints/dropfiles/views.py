@@ -1,7 +1,5 @@
 from flask import (
     Blueprint,
-    flash,
-    redirect,
     url_for,
     render_template,
     request,
@@ -14,9 +12,7 @@ from flask_login import (
     login_required
 )
 
-from celery import states
 from werkzeug import secure_filename
-from cardpointeflask.extensions import excel
 import logging
 import os
 from .forms import DropForm
