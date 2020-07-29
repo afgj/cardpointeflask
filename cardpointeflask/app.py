@@ -109,7 +109,7 @@ def authentication(app, user_model):
     @login_manager.user_loader
     def load_user(uid):
         return user_model.query.get(uid)
-    
+
     @login_manager.request_loader
     def load_request(request):
         duration = app.config['REMEMBER_COOKIE_DURATION'].total_seconds()
