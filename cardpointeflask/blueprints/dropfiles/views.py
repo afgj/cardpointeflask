@@ -36,20 +36,22 @@ def upload_file():
             import process_files
         for key, f in request.files.items():
             if key.startswith('file'):
-                f.save(os.path.join(current_app.config['UPLOAD_FOLDER'],\
-                    secure_filename(f.filename)))
+                f.save(
+                    os.path.join(current_app.config['UPLOAD_FOLDER'],
+                                 secure_filename(f.filename)))
                 LOG.debug(f"{secure_filename(f.filename)} WRITTEN TO DISK")
                 files.append(secure_filename(f.filename))
         task = process_files.delay(files)
-        return jsonify({'Location': url_for('dropfiles.taskstatus',\
-            task_id=task.id)}), 202
+        return jsonify({'Location': url_for('dropfiles.taskstatus',
+                                            task_id=task.id)}), 202
     return render_template('dropfiles/upload.html', form=form)
 
 
 @dropfiles.route("/export/<filename>", methods=['GET'])
 @login_required
 def export_records(filename):
-    pathname = os.path.join(current_app.config['UPLOAD_FOLDER'], secure_filename(filename))
+    pathname = os.path.join(current_app.config['UPLOAD_FOLDER'],
+                            secure_filename(filename))
     if os.path.isfile(pathname):
         return send_file(pathname)
     abort(404, description="Resource not found")
