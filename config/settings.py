@@ -2,7 +2,6 @@ from datetime import timedelta
 
 DEBUG = True
 
-SERVER_NAME = 'local.docker:8000'
 SECRET_KEY = 'insecurekeyfordev'
 
 UPLOAD_FOLDER = '/cardpointeflask/uploads/'
